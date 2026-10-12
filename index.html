@@ -1,141 +1,147 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="./manifest.json">
-<title>학교 컴퓨터 관리자</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101a30">
+<title>PC REPAIR SYSTEM</title>
 <style>
-:root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--primary:#111827;--blue:#2563eb;--green:#059669;--red:#dc2626;--orange:#d97706}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
-.top{position:sticky;top:0;z-index:10;background:#111827;color:#fff;padding:16px max(16px,calc((100vw - 1180px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}
-.top h1{font-size:19px;margin:0}.top small{color:#cbd5e1}.wrap{max-width:1180px;margin:auto;padding:18px}
-.login{max-width:430px;margin:8vh auto;background:var(--card);padding:28px;border-radius:22px;box-shadow:0 12px 35px #00000012}.login h2{margin-top:0}
-.input{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:12px;outline:none}.input:focus{border-color:#9ca3af}
-.btn{padding:12px 16px;border-radius:12px;font-weight:700;background:var(--primary);color:white}.btn.secondary{background:#e5e7eb;color:#111827}.btn.blue{background:var(--blue)}.btn.red{background:var(--red)}
-.grid{display:grid;grid-template-columns:390px 1fr;gap:16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}.panel-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.list{max-height:calc(100vh - 170px);overflow:auto}.item{padding:15px 17px;border-bottom:1px solid var(--line);cursor:pointer}.item:hover,.item.active{background:#f8fafc}.item strong{display:block;margin-bottom:5px}.meta{font-size:12px;color:var(--muted)}.badge{display:inline-flex;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800;margin-top:8px;background:#e5e7eb}.badge.접수{background:#dbeafe;color:#1d4ed8}.badge.대화중{background:#fef3c7;color:#92400e}.badge.처리완료{background:#d1fae5;color:#065f46}.badge.대화종료{background:#e5e7eb;color:#374151}
-.detail{display:flex;flex-direction:column;min-height:600px}.info{padding:17px;border-bottom:1px solid var(--line)}.info h2{margin:0 0 8px;font-size:18px}.detailtext{white-space:pre-wrap;color:#374151;background:#f9fafb;border-radius:12px;padding:12px;margin-top:12px}
-.messages{flex:1;padding:18px;overflow:auto;background:#f8fafc}.msg{display:flex;margin:8px 0}.msg.admin{justify-content:flex-end}.bubble{max-width:min(80%,650px);padding:10px 13px;border-radius:15px;background:white;border:1px solid var(--line);white-space:pre-wrap}.msg.admin .bubble{background:#111827;color:#fff;border-color:#111827}.time{font-size:10px;color:#9ca3af;margin-top:5px}
-.composer{padding:13px;border-top:1px solid var(--line);display:flex;gap:8px}.composer textarea{flex:1;resize:none;min-height:48px;max-height:120px}.actions{display:flex;gap:7px;flex-wrap:wrap}.empty{height:100%;display:grid;place-items:center;color:var(--muted);padding:50px;text-align:center}
-@media(max-width:800px){.wrap{padding:10px}.grid{grid-template-columns:1fr}.list{max-height:38vh}.detail{min-height:62vh}.top{padding:13px 14px}.top h1{font-size:16px}.info{padding:13px}.messages{padding:12px}.bubble{max-width:88%}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;background:#f1f4f8;color:#10203a}
+header{height:66px;background:#101a30;color:white;display:flex;align-items:center}
+.head{width:min(1000px,calc(100% - 32px));margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:20px;font-weight:800}.sub{font-size:11px;color:#9eacc5;margin-top:3px}
+button{border:0;border-radius:18px;padding:9px 16px;cursor:pointer;font-size:13px}
+.logout{background:white;color:#17233a}
+main{width:min(1000px,calc(100% - 32px));margin:18px auto}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.stat{background:white;border-radius:16px;padding:16px;box-shadow:0 1px 2px #dfe4ec}
+.stat .label{font-size:11px;color:#75839a}.stat .num{font-size:25px;font-weight:800;margin-top:5px}
+.new .num{color:#e33}.talk .num{color:#d99300}.done .num{color:#6782a6}
+.layout{display:grid;grid-template-columns:388px 1fr;gap:18px}
+.panel{background:white;border-radius:16px;overflow:hidden;box-shadow:0 1px 2px #dfe4ec}
+.panel-title{padding:16px;border-bottom:1px solid #e6eaf0;font-weight:800;display:flex;justify-content:space-between}
+.refresh{background:none;color:#6354e8;padding:0}
+.list{max-height:510px;overflow:auto}
+.item{padding:15px;border-bottom:1px solid #e7ebf1;cursor:pointer}
+.item:hover,.item.selected{background:#f8f9fc}
+.item .name{font-weight:800}.item .type{font-size:12px;color:#56657c;margin-top:5px}
+.item .time{font-size:11px;color:#91a0b5;margin-top:8px}
+.badge{float:right;background:#e9eef4;border-radius:14px;padding:5px 9px;font-size:10px;color:#5c6c80}
+.chat{display:flex;flex-direction:column;height:510px}
+.chat-head{padding:16px;border-bottom:1px solid #e6eaf0}
+.chat-head h2{font-size:17px;margin:0 0 6px}.meta{font-size:12px;color:#6c7c93}
+.chat-msgs{flex:1;overflow:auto;padding:14px 18px;background:#fff}
+.bubble{max-width:78%;padding:11px 13px;border-radius:14px;margin:8px 0;font-size:13px}
+.bubble.student{background:#edf2f8;margin-right:auto}.bubble.admin{background:#5144e9;color:white;margin-left:auto}
+.sender{font-size:10px;opacity:.65;margin-bottom:6px}.when{font-size:9px;opacity:.6;margin-top:8px}
+.composer{display:flex;gap:8px;padding:12px;border-top:1px solid #e6eaf0}
+.composer input{flex:1;border:1px solid #d8dee8;border-radius:20px;padding:11px 14px;outline:none}
+.send{background:#5144e9;color:white}
+.statusbar{display:flex;gap:7px;padding:10px 12px;border-top:1px solid #e6eaf0}
+.statusbar button{background:#eef2f6;color:#4e6078;font-size:11px}
+.statusbar button:hover{background:#dfe6ef}
+.login{position:fixed;inset:0;background:#101a30;display:flex;align-items:center;justify-content:center}
+.loginbox{background:white;width:min(360px,calc(100% - 36px));padding:28px;border-radius:18px}
+.loginbox h1{margin:0 0 8px;font-size:22px}.loginbox p{color:#738096;font-size:12px}
+.loginbox input{width:100%;padding:12px;border:1px solid #d8dee8;border-radius:10px;margin:10px 0}
+.loginbox button{width:100%;background:#5144e9;color:white;border-radius:10px}
+.empty{height:100%;display:flex;align-items:center;justify-content:center;color:#8190a6;font-size:13px}
+@media(max-width:760px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .layout{grid-template-columns:1fr}
+ .list{max-height:330px}.chat{height:560px}
+}
 </style>
 </head>
 <body>
-<header class="top"><div><h1>🛠️ 학교 컴퓨터 관리자</h1><small id="conn">연결 준비 중</small></div><button class="btn secondary" id="logout" style="display:none">로그아웃</button></header>
-
-<main class="wrap">
-<section id="login" class="login">
-<h2>관리자 로그인</h2>
-<p style="color:#6b7280">신고 내역과 학생과의 대화를 관리합니다.</p>
-<input id="password" class="input" type="password" placeholder="관리자 비밀번호" autocomplete="current-password">
-<button id="loginBtn" class="btn" style="width:100%;margin-top:10px">로그인</button>
-<p id="loginMsg" style="color:#dc2626"></p>
-</section>
-
-<section id="app" style="display:none">
-<div class="grid">
-<div class="panel">
-<div class="panel-head"><strong>신고 목록</strong><button id="refresh" class="btn secondary">새로고침</button></div>
-<div id="list" class="list"></div>
+<header><div class="head"><div><div class="logo">🖥️ PC REPAIR SYSTEM</div><div class="sub">학교 컴퓨터 고장 신고 관리자</div></div><button class="logout" onclick="logout()">로그아웃</button></div></header>
+<main>
+<div class="stats">
+<div class="stat"><div class="label">전체 신고</div><div class="num" id="total">0</div></div>
+<div class="stat new"><div class="label">새 신고</div><div class="num" id="newc">0</div></div>
+<div class="stat talk"><div class="label">대화 중</div><div class="num" id="talk">0</div></div>
+<div class="stat done"><div class="label">종료</div><div class="num" id="done">0</div></div>
 </div>
-<div class="panel detail">
-<div id="info" class="info"><div class="empty">왼쪽에서 신고를 선택하세요.</div></div>
-<div id="messages" class="messages"><div class="empty">대화 내용이 여기에 표시됩니다.</div></div>
-<div class="composer" id="composer" style="display:none">
-<textarea id="message" class="input" placeholder="학생에게 보낼 메시지..."></textarea>
-<button id="send" class="btn blue">전송</button>
+<div class="layout">
+<section class="panel"><div class="panel-title">신고 목록 <button class="refresh" onclick="loadReports()">새로고침</button></div><div id="list" class="list"></div></section>
+<section class="panel chat" id="chat"><div class="empty">왼쪽에서 신고를 선택하세요.</div></section>
 </div>
-</div>
-</div>
-</section>
 </main>
-
+<div class="login" id="login"><div class="loginbox"><h1>PC REPAIR SYSTEM</h1><p>관리자 비밀번호를 입력하세요.</p><input id="pw" type="password" placeholder="비밀번호" onkeydown="if(event.key==='Enter')login()"><button onclick="login()">로그인</button></div></div>
 <script>
 const API='https://script.google.com/macros/s/AKfycbyifFoHXBvo0yUqO9kWxdRhPRo8-Fw9n9nKrqLhI1YtvJrdD8yhionCtZjK5YEKVcrrig/exec';
-let password='', selectedId='', reports=[], timer=null;
+let password=sessionStorage.getItem('adminPassword')||'', reports=[], selected=null;
 
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function api(action, params={}){return new Promise((resolve,reject)=>{
- const cb='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
- const script=document.createElement('script');
- const q=new URLSearchParams({api:action,password,...params,callback:cb});
- const timer=setTimeout(()=>{cleanup();reject(new Error('서버 응답 시간 초과'));},12000);
- function cleanup(){clearTimeout(timer);delete window[cb];script.remove();}
- window[cb]=(data)=>{cleanup();resolve(data)};
- script.onerror=()=>{cleanup();reject(new Error('서버에 연결할 수 없습니다.'))};
- script.src=API+'?'+q.toString();
- document.body.appendChild(script);
-});}
-
-function statusClass(s){return s.replaceAll(' ','').replace('대화중','대화중').replace('처리완료','처리완료').replace('대화종료','대화종료');}
-function renderList(){
- const el=document.getElementById('list');
- if(!reports.length){el.innerHTML='<div class="empty">접수된 신고가 없습니다.</div>';return;}
- el.innerHTML=reports.map(r=>`<div class="item ${r.id===selectedId?'active':''}" onclick="selectReport('${esc(r.id)}')">
- <strong>${esc(r.reporterName||'이름 없음')} · ${esc(r.issueType||'기타')}</strong>
- <div class="meta">${esc(r.id)} · ${esc(r.time)}</div>
- <div class="meta">${esc(r.detail||'상세 내용 없음')}</div>
- <span class="badge ${statusClass(r.status)}">${esc(r.status)}</span></div>`).join('');
+function jsonp(params){
+ return new Promise((resolve,reject)=>{
+  const cb='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  const s=document.createElement('script');
+  params.callback=cb;
+  window[cb]=d=>{delete window[cb];s.remove();resolve(d)};
+  s.onerror=()=>{delete window[cb];s.remove();reject(new Error('API 연결 실패'))};
+  s.src=API+'?'+new URLSearchParams(params);
+  document.body.appendChild(s);
+ });
 }
+async function login(){
+ const pw=document.getElementById('pw').value.trim();
+ if(!pw)return;
+ const r=await jsonp({api:'login',password:pw});
+ if(r.success){password=pw;sessionStorage.setItem('adminPassword',pw);document.getElementById('login').style.display='none';loadReports()}
+ else alert('비밀번호가 틀렸습니다.');
+}
+function logout(){sessionStorage.removeItem('adminPassword');location.reload()}
 async function loadReports(){
- document.getElementById('conn').textContent='불러오는 중...';
- const r=await api('reports');
- if(!r.success) throw new Error(r.message||'불러오기 실패');
- reports=r.reports||[]; renderList(); document.getElementById('conn').textContent=`신고 ${reports.length}건`;
- if(selectedId) await selectReport(selectedId,false);
+ if(!password)return;
+ try{
+  const r=await jsonp({api:'reports',password});
+  if(!r.success){logout();return}
+  reports=r.reports||[];
+  renderList();updateStats();
+  if(selected)loadConversation(selected.id);
+ }catch(e){console.error(e)}
 }
-async function selectReport(id, rerender=true){
- selectedId=id; if(rerender) renderList();
- const r=await api('conversation',{reportId:id});
- if(!r.success){alert(r.message);return;}
- const x=r.report;
- document.getElementById('info').innerHTML=`<h2>${esc(x.reporterName||'이름 없음')} <span class="badge ${statusClass(x.status)}">${esc(x.status)}</span></h2>
- <div class="meta">${esc(x.id)} · ${esc(x.time)} · ${esc(x.issueType)}</div>
- <div class="detailtext">${esc(x.detail||'상세 내용 없음')}</div>
- <div class="actions" style="margin-top:12px">
- <button class="btn secondary" onclick="changeStatus('접수')">접수</button>
- <button class="btn secondary" onclick="changeStatus('대화 중')">대화 중</button>
- <button class="btn secondary" onclick="changeStatus('처리 완료')">처리 완료</button>
- <button class="btn red" onclick="changeStatus('대화 종료')">대화 종료</button></div>`;
- document.getElementById('messages').innerHTML=(r.messages||[]).map(m=>`<div class="msg ${m.sender==='관리자'?'admin':''}"><div><div class="bubble">${esc(m.text)}</div><div class="time">${esc(m.sender)} · ${esc(m.time)}</div></div></div>`).join('')||'<div class="empty">아직 대화가 없습니다.</div>';
- document.getElementById('composer').style.display=x.status==='대화 종료'?'none':'flex';
- const box=document.getElementById('messages');box.scrollTop=box.scrollHeight;
+function updateStats(){
+ total.textContent=reports.length;
+ newc.textContent=reports.filter(x=>x.status==='접수').length;
+ talk.textContent=reports.filter(x=>x.status==='대화 중').length;
+ done.textContent=reports.filter(x=>x.status==='대화 종료'||x.status==='처리 완료').length;
 }
-async function changeStatus(s){
- if(!selectedId)return;
- const r=await api('status',{reportId:selectedId,newStatus:s});
- if(!r.success){alert(r.message);return;}
- await loadReports();
+function renderList(){
+ list.innerHTML=reports.length?reports.map(x=>`
+ <div class="item ${selected&&selected.id===x.id?'selected':''}" onclick="selectReport('${x.id}')">
+  <span class="badge">${esc(x.status)}</span><div class="name">${esc(x.reporterName||'익명')}</div>
+  <div class="type">${esc(x.issueType||'기타')}</div><div class="time">${esc(x.time)}</div>
+ </div>`).join(''):'<div class="empty">신고가 없습니다.</div>';
 }
-async function sendMessage(){
- const input=document.getElementById('message'); const text=input.value.trim();
- if(!text||!selectedId)return;
- const r=await api('send',{reportId:selectedId,message:text});
- if(!r.success){alert(r.message);return;}
- input.value=''; await loadReports();
+async function selectReport(id){
+ selected=reports.find(x=>x.id===id);renderList();loadConversation(id)
 }
-function login(){
- const p=document.getElementById('password').value;
- if(!p)return;
- password=p;
- api('login').then(r=>{
-   if(!r.success){document.getElementById('loginMsg').textContent='비밀번호가 틀렸습니다.';return;}
-   document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';document.getElementById('logout').style.display='block';
-   loadReports().catch(e=>alert(e.message));
-   clearInterval(timer);timer=setInterval(()=>loadReports().catch(()=>{}),7000);
- }).catch(e=>document.getElementById('loginMsg').textContent=e.message);
+async function loadConversation(id){
+ const r=await jsonp({api:'conversation',password,reportId:id});
+ if(!r.success)return;
+ const x=r.report, ms=r.messages||[];
+ chat.innerHTML=`<div class="chat-head"><button class="badge">${esc(x.status)}</button><h2>${esc(x.reporterName||'익명')}</h2><div class="meta">${esc(x.issueType||'기타')} · ${esc(x.id)}</div></div>
+ <div class="chat-msgs" id="msgs">${ms.map(m=>`<div class="bubble ${m.sender==='관리자'?'admin':'student'}"><div class="sender">${esc(m.sender)}</div>${esc(m.text)}<div class="when">${esc(m.time)}</div></div>`).join('')}</div>
+ <div class="composer"><input id="msg" placeholder="메시지를 입력하세요" onkeydown="if(event.key==='Enter')sendMsg()"><button class="send" onclick="sendMsg()">전송</button></div>
+ <div class="statusbar"><button onclick="setStatus('접수')">접수</button><button onclick="setStatus('대화 중')">대화 중</button><button onclick="setStatus('처리 완료')">처리 완료</button><button onclick="setStatus('대화 종료')">대화 종료</button></div>`;
+ const el=document.getElementById('msgs');el.scrollTop=el.scrollHeight;
 }
-document.getElementById('loginBtn').onclick=login;
-document.getElementById('password').onkeydown=e=>{if(e.key==='Enter')login();};
-document.getElementById('refresh').onclick=()=>loadReports().catch(e=>alert(e.message));
-document.getElementById('send').onclick=sendMessage;
-document.getElementById('message').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}};
-document.getElementById('logout').onclick=()=>{password='';selectedId='';reports=[];clearInterval(timer);location.reload();};
-if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+async function sendMsg(){
+ const input=document.getElementById('msg');if(!input||!input.value.trim()||!selected)return;
+ const r=await jsonp({api:'send',password,reportId:selected.id,message:input.value.trim()});
+ if(r.success){input.value='';await loadReports()}else alert(r.message||'전송 실패');
+}
+async function setStatus(status){
+ if(!selected)return;
+ const r=await jsonp({api:'status',password,reportId:selected.id,newStatus:status});
+ if(r.success){await loadReports()}else alert(r.message||'상태 변경 실패');
+}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+if(password){document.getElementById('login').style.display='none';loadReports()}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+setInterval(()=>{if(password)loadReports()},5000);
 </script>
-</body>
-</html>
+</body></html>
